@@ -39,12 +39,8 @@ htmlcov/
 backend/careconnect.db
 *.sqlite3
 *.db
-uploads/chat/*
-uploads/prescriptions/*
-uploads/medical_records/*
-!uploads/.gitkeep
-!uploads/prescriptions/.gitkeep
-!uploads/medical_records/.gitkeep
+uploads/
+backend/uploads/
 
 # Logs
 *.log

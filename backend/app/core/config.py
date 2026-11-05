@@ -16,10 +16,12 @@ class Settings:
     _raw_db_url: str = os.getenv("DATABASE_URL", f"sqlite:///{DB_PATH}")
     # Render and some providers provide postgres:// instead of postgresql://
     if _raw_db_url.startswith("postgres://"):
-        _raw_db_url = _raw_db_url.replace("postgres://", "postgresql://", 1)
+        _raw_db_url = _raw_db_url.replace("postgres://", "postgresql+psycopg://", 1)
+    elif _raw_db_url.startswith("postgresql://") and not _raw_db_url.startswith("postgresql+"):
+        _raw_db_url = _raw_db_url.replace("postgresql://", "postgresql+psycopg://", 1)
     DATABASE_URL: str = _raw_db_url
     
-    UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", os.path.join(PROJECT_ROOT, "uploads"))
+    UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", os.path.join(BASE_DIR, "uploads"))
     PRESCRIPTION_UPLOAD_DIR: str = os.path.join(UPLOAD_DIR, "prescriptions")
     MEDICAL_RECORDS_UPLOAD_DIR: str = os.path.join(UPLOAD_DIR, "medical_records")
     

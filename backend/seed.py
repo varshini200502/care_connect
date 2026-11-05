@@ -16,12 +16,16 @@ from app.models.models import (
 from app.services.pdf_service import generate_prescription_pdf
 
 def seed_database():
-    print("Dropping existing tables and recreating schema...")
-    Base.metadata.drop_all(bind=engine)
+    print("Ensuring database schema exists...")
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
 
     try:
+        existing_admin = db.query(User).filter(User.email == "admin@careconnect.com").first()
+        if existing_admin:
+            print("Database already contains seed data. Skipping re-seeding.")
+            return
+
         print("Creating users...")
         # 1. Administrator
         admin = User(

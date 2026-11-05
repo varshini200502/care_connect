@@ -27,6 +27,12 @@ async def lifespan(app: FastAPI):
     # Ensure database schema is created
     logger.info("Initializing CareConnect Database schema...")
     Base.metadata.create_all(bind=engine)
+    try:
+        from seed import seed_database
+        seed_database()
+        logger.info("CareConnect seed data verified.")
+    except Exception as e:
+        logger.warning(f"Auto-seed check: {e}")
     logger.info("CareConnect backend ready.")
     yield
 
