@@ -1,34 +1,46 @@
 # CareConnect – Pediatrician Online Consultation Platform 🩺👶
 
-CareConnect is an end-to-end, full-stack pediatric telemedicine and online consultation platform designed to connect parents and legal guardians directly with verified pediatricians. Built with **React 18, Vite, TypeScript, Tailwind CSS, FastAPI, SQLAlchemy ORM, WebSockets, ReportLab, and PostgreSQL/SQLite**, CareConnect delivers a hospital-grade, secure digital clinic experience.
+CareConnect is an end-to-end, full-stack pediatric telemedicine and online consultation platform designed to connect parents and legal guardians directly with verified pediatricians. Built with **React 18, Vite, TypeScript, Tailwind CSS, FastAPI, SQLAlchemy ORM, WebSockets, ReportLab, and PostgreSQL/SQLite**, CareConnect delivers a modern, secure digital clinic experience.
+
+---
+
+## 🌐 Live Demo & Deployment
+
+The application is deployed and publicly accessible in production:
+
+- **Live Web Application:** [https://care-connect-kappa-cyan.vercel.app](https://care-connect-kappa-cyan.vercel.app)
+- **Backend API Service:** [https://careconnect-backend-8np1.onrender.com](https://careconnect-backend-8np1.onrender.com)
+- **Interactive OpenAPI Documentation:** [https://careconnect-backend-8np1.onrender.com/docs](https://careconnect-backend-8np1.onrender.com/docs)
+
+*Note: The backend service is hosted on Render's free tier. If the service has been inactive for more than 15 minutes, the first incoming request may take 30–50 seconds to wake up the cloud container. All subsequent requests respond instantaneously.*
 
 ---
 
 ## 🌟 Key Capabilities & Features
 
 ### 1. 👨‍👩‍👧 Parent Module
-- **Registration & Authentication**: JWT-based session security with Guardian Consent verification compliant with the Telemedicine Practice Guidelines and DPDP Act.
-- **Multi-Child Health Profiles**: Manage profiles for multiple children under a single guardian account (DOB, calculated age, blood group, drug/food allergies, past medical conditions).
+- **Registration & Authentication**: Secure JWT-based session management with role-based access control and affirmative guardian consent.
+- **Multi-Child Health Profiles**: Manage profiles for multiple children under a single guardian account (date of birth, age, blood group, allergies, existing medical conditions, and medical history).
 - **Appointment Scheduling**: Interactive calendar booking showing real-time doctor availability with automatic conflict removal and server-side double-booking prevention (HTTP 409).
-- **Prescription Vault**: Instantly access and download digitally signed PDF prescriptions generated during pediatric consultations.
-- **Medical Records**: Securely upload and store vaccination records, lab test reports, and imaging scans.
+- **Prescription Vault**: Instantly access and download digitally generated PDF prescriptions created during pediatric consultations.
+- **Medical Records**: Securely upload and store child immunization records, lab test reports, and imaging documents.
 
 ### 2. 🩺 Doctor Dashboard
-- **Consultation Schedule**: Overview of today’s patient queue, start-times, chief medical complaints, and patient age.
-- **Interactive Video Clinic**: Conduct secure, encrypted Jitsi Meet video consultations with live stopwatch duration tracking, fullscreen controls, and clinical summary drawer.
-- **Digital Prescription Generator**: Formally issue prescriptions with dynamic medication rows (medicine name, form, pediatric dosage, frequency, duration, administration instructions) and automatic ReportLab PDF creation.
-- **Availability Manager**: Configure working hours by day, slot duration (15/30/45 mins), break timings (e.g. 13:00 - 14:00), and block out dates for conferences or leave.
+- **Consultation Schedule**: Overview of today’s patient queue, start times, chief medical complaints, and child details.
+- **Interactive Video Clinic**: Conduct encrypted video consultations powered by Jitsi Meet with duration tracking, fullscreen controls, and clinical summary access.
+- **Digital Prescription Generator**: Formally issue prescriptions with dynamic medication rows (medicine name, dosage, frequency, duration, administration instructions) and automatic ReportLab PDF creation.
+- **Availability Manager**: Configure working hours by day, slot duration (15/30/45 mins), break timings (e.g. 13:00 - 14:00), and block out dates for leave or unavailability.
 
 ### 3. 💬 Real-Time Messaging & Notifications
 - **WebSocket Chat**: Low-latency, one-to-one messaging between parent and pediatrician linked directly to the consultation.
-- **Live Typing Indicators & Read Receipts**: Real-time typing status and message read confirmation.
-- **Prescription In-Chat Cards**: Digital prescriptions are automatically rendered directly into the consultation chat thread with one-click PDF downloads.
-- **In-App Real-time Notifications**: Instant alerts for appointment bookings, confirmations, doctor messages, and prescription generation.
+- **Live Typing Indicators & Read Receipts**: Real-time typing status and message delivery confirmation.
+- **Prescription In-Chat Cards**: Digital prescriptions are rendered directly into the consultation chat thread with one-click PDF downloads.
+- **In-App Notifications**: Alerts for appointment bookings, confirmations, doctor messages, and prescription generation.
 
 ### 4. 🛡️ Administrator & Security Oversight
-- **Platform Analytics**: Interactive KPI metrics and Recharts visualizations for user distribution, appointments, and prescriptions.
-- **Pediatrician Credential Verification**: Admin review of doctor registration licenses (MCI/NMC) with instant verification toggle.
-- **Audit Logging**: Comprehensive security audit trail recording user logins, appointment bookings, and prescription creations with IP logging.
+- **Platform Analytics**: Interactive KPI metrics and charts for user distribution, appointments, and prescriptions.
+- **Pediatrician Verification**: Admin review of doctor registration licenses with an instant verification toggle.
+- **Audit Logging**: Security audit trail recording user logins, appointment bookings, and prescription actions with timestamp and IP tracking.
 
 ---
 
@@ -38,25 +50,21 @@ CareConnect is an end-to-end, full-stack pediatric telemedicine and online consu
 |---|---|
 | **Frontend** | React 18, TypeScript, Vite, Tailwind CSS, React Router v6, Axios, Lucide React, Recharts |
 | **Backend** | Python 3.11, FastAPI, SQLAlchemy ORM, Pydantic v2, Uvicorn |
-| **Database** | PostgreSQL (Production / Docker) & SQLite (Zero-dependency local development) |
+| **Database** | PostgreSQL (Production) & SQLite (Local development) |
 | **Migrations** | Alembic |
 | **Real-time** | WebSockets (Chat & In-app Notifications) |
-| **Video Calls** | Jitsi Meet Integration (Encrypted Consultation Rooms) |
-| **PDF Generation** | ReportLab (Pediatric Letterhead, Rx Table, Telemedicine Legal Disclaimers) |
+| **Video Calls** | Jitsi Meet Integration (Unique Consultation Rooms) |
+| **PDF Generation** | ReportLab (Pediatric Letterhead, Rx Table, Consultation Details) |
 | **Security** | BCrypt password hashing, JWT Bearer tokens, Role-Based Access Control (RBAC) |
 
 ---
 
-## 🔑 Demo Development Credentials
+## 🔑 Demo Access & Testing
 
-A complete set of demo seed accounts is pre-configured. You can log in using these credentials or use the **1-Click Demo Login** buttons on the login page:
-
-| Role | Email | Password | Details |
-|---|---|---|---|
-| **Administrator** | `admin@careconnect.com` | `Admin@123` | Full administrative oversight and audit logs |
-| **Pediatrician** | `dr.sharma@careconnect.com` | `Doctor@123` | Dr. Rajesh Sharma, MD (AIIMS), MCI-DMR-2014-88421 |
-| **Parent 1** | `priya.sharma@gmail.com` | `Parent@123` | Parent of Aarav Sharma (3 yrs) & Ananya Sharma (10 mos) |
-| **Parent 2** | `vikram.mehta@gmail.com` | `Parent@123` | Parent of Vivaan Mehta (15 mos, eczema & allergies) |
+For testing and evaluation:
+- Visitors can self-register a new **Parent Account** directly through the registration page.
+- Pre-configured demo accounts for **Doctor**, **Parent**, and **Administrator** roles are accessible via the **1-Click Demo Login** shortcuts provided directly on the application's login screen.
+- In accordance with healthcare data privacy best practices, actual user credentials and personal health details are not published in public documentation.
 
 ---
 
@@ -110,7 +118,7 @@ cd backend
 python test_suite.py
 ```
 
-All 6 test suites execute and pass with zero failures:
+All test suites execute with zero failures:
 ```
 [PASS] Root Health check passed
 [PASS] Authentication & Role-based tokens passed
@@ -124,7 +132,7 @@ All 6 test suites execute and pass with zero failures:
 
 ## 🐳 Docker Deployment
 
-To launch the entire platform with PostgreSQL, FastAPI backend, and Nginx frontend in Docker:
+To launch the entire platform with PostgreSQL, FastAPI backend, and frontend in Docker:
 
 ```bash
 docker-compose up --build
@@ -135,9 +143,9 @@ docker-compose up --build
 
 ---
 
-## 📋 Regulatory & Telemedicine Practice Compliance
+## 📋 Healthcare Workflow & Privacy Safeguards
 
-- **Guardian Consent**: Telemedicine for minors requires affirmative guardian consent. CareConnect incorporates legal consent checkboxes during registration and booking.
-- **Doctor Verification**: Only pediatricians verified with valid registration numbers (NMC / State Medical Councils) can issue prescriptions.
-- **Restricted Medicine Safeguards**: In accordance with the Telemedicine Practice Guidelines, the system does not auto-generate or suggest restricted narcotics/psychotropics, ensuring medical evaluation rests with the treating doctor.
-- **Privacy & Data Security**: Children's health information is isolated by family account and never exposed via public unauthenticated routes.
+- **Guardian Consent Verification**: Affirmative guardian consent checkboxes during registration and booking.
+- **Pediatrician Verification**: Administrative review and verification of pediatrician profiles and medical license credentials.
+- **Patient Data Isolation**: Children's health profiles and digital prescriptions are strictly isolated by account with role-based authorization checks preventing unauthenticated or cross-family access.
+- **Protected Medical Documents**: Prescription PDFs and medical records return HTTP 401 Unauthorized for unauthenticated requests and HTTP 403 Forbidden for cross-user attempts.
