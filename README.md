@@ -149,3 +149,47 @@ docker-compose up --build
 - **Pediatrician Verification**: Administrative review and verification of pediatrician profiles and medical license credentials.
 - **Patient Data Isolation**: Children's health profiles and digital prescriptions are strictly isolated by account with role-based authorization checks preventing unauthenticated or cross-family access.
 - **Protected Medical Documents**: Prescription PDFs and medical records return HTTP 401 Unauthorized for unauthenticated requests and HTTP 403 Forbidden for cross-user attempts.
+
+---
+
+## 🏛️ Backend Architecture & Database Management
+
+CareConnect uses a Python-based backend built with FastAPI, SQLAlchemy ORM and PostgreSQL to handle application logic and data management.
+
+### Technology Responsibilities
+
+| Technology | Purpose |
+|---|---|
+| **Python** | Implements backend application logic. |
+| **FastAPI** | Handles API requests and responses between the frontend and backend. |
+| **Pydantic** | Validates incoming and outgoing data. |
+| **SQLAlchemy ORM** | Connects Python application models with database tables and performs database operations. |
+| **Alembic** | Manages database schema changes through migration scripts. |
+| **Mako** | Provides the template used by Alembic to generate migration scripts. |
+| **PostgreSQL** | Stores application data in the production environment. |
+
+### Application Data Flow
+
+When a parent registers or adds a child profile:
+
+1. The React frontend sends the request to the FastAPI backend.
+2. Pydantic validates the submitted data.
+3. FastAPI processes the request using the application logic.
+4. SQLAlchemy performs the required database operations.
+5. PostgreSQL stores the information.
+6. The backend returns a response to the frontend.
+
+```mermaid
+flowchart LR
+    A[React Frontend] --> B[FastAPI Backend]
+    B --> C[Pydantic Validation]
+    C --> D[SQLAlchemy ORM]
+    D --> E[(PostgreSQL Database)]
+```
+
+### Database Migration Management
+
+Alembic is used to manage changes to the database structure, such as adding columns or creating tables. It generates migration scripts using its Mako template and applies approved changes to the database.
+
+**Note:** SQLAlchemy handles regular database operations, whereas Alembic manages database structure changes.
+
